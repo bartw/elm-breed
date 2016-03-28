@@ -2,6 +2,10 @@ module Breed where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Html.Lazy exposing (lazy, lazy2, lazy3)
+import Signal exposing (Signal, Address)
+import String
 
 -- MODEL
 
@@ -37,20 +41,72 @@ newPerson firstName lastName id =
 
 type Action
     = NoOp
+    | UpdateFirstNameField String
+    | UpdateLastNameField String
+    | AddPerson
     
 update : Action -> Model -> Model
 update action model =
     case action of
-        NoOp -> model   
+        NoOp -> model
+        
+        UpdateFirstNameField firstName ->
+            { model | firstNameField = firstName }
+            
+        UpdateLastNameField lastName ->
+            { model | lastNameField = lastName }
+        
+        AddPerson ->
+            { model |
+                uid = model.uid + 1,
+                firstNameField = "",
+                lastNameField = "",
+                people =
+                    if String.isEmpty model.firstNameField || String.isEmpty model.lastNameField
+                    then model.people
+                    else model.people ++ [ newPerson model.firstNameField model.lastNameField model.uid ]
+            }
 
 -- VIEW
 
-view : Signal.Address Action -> Model -> Html
+view : Address Action -> Model -> Html
 view address model =
     div
-      [ class "breed-wrapper" ]
-      [ div [ id "breedapp" ] [ text ("breed") ] ]
+        [ class "breed-wrapper" ]
+        [ div 
+            [ id "breedapp" ] 
+            [ lazy3 personEntry address model.firstNameField model.lastNameField
+            ]
+        ]
 
+personEntry : Address Action -> String -> String -> Html
+personEntry address firstName lastName = 
+    header
+        [ id "header" ]
+        [ h1 [] [ text "people" ]
+        , input 
+            [ id "newFirstName"
+            , placeholder "Firstname"
+            , autofocus True
+            , value firstName
+            , name "newFirstName"
+            , on "input" targetValue (Signal.message address << UpdateFirstNameField)
+            ]
+            []
+        , input 
+            [ id "newLastName"
+            , placeholder "Lastname"
+            , autofocus True
+            , value lastName
+            , name "newLastName"
+            , on "input" targetValue (Signal.message address << UpdateLastNameField)
+            ]
+            []
+        , button
+            [ id "addPerson"
+            , onClick address AddPerson ]
+            [ text "Add" ]
+        ]
 
 -- INPUTS
 
