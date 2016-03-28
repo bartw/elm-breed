@@ -2,7 +2,7 @@
 
 I will use this repo to create a simple family tree app to learn [elm](http://elm-lang.org/).
 
-## Install elm
+## install elm
 
 ```shell
 npm install elm -g
@@ -27,6 +27,7 @@ With the elm repl you can test out elm code in your cli.
  point.x
  ```
  
- ## [hello world](hello-world)
+ ## hello world
  
- Create a hello world web site.
+ Create a [hello world](hello-world) web site.
+ 
