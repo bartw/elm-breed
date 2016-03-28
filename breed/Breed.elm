@@ -6,7 +6,32 @@ import Html.Attributes exposing (..)
 -- MODEL
 
 type alias Model = 
-    {}
+    { people : List Person
+    , firstNameField : String
+    , lastNameField : String
+    , uid : Int
+    }
+    
+type alias Person =
+    { firstName : String
+    , lastName : String
+    , id : Int
+    }
+    
+emptyModel : Model
+emptyModel =
+    { people = []
+    , firstNameField = ""
+    , lastNameField = ""
+    , uid = 0
+    }
+    
+newPerson : String -> String -> Int -> Person
+newPerson firstName lastName id =
+    { firstName = firstName
+    , lastName = lastName
+    , id = id
+    }    
 
 -- UPDATE
 
@@ -38,7 +63,7 @@ model =
     Signal.foldp update initialModel actions.signal 
 
 initialModel : Model
-initialModel = {}  
+initialModel = emptyModel  
 
 actions : Signal.Mailbox Action 
 
