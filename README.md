@@ -30,3 +30,7 @@ point.x
 ## [hello world](hello-world)
 
 Create a hello world web site.
+
+## [simple app](simple-app)
+
+Create basic html.
