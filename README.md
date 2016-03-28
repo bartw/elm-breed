@@ -2,7 +2,7 @@
 
 I will use this repo to create a simple family tree app to learn [elm](http://elm-lang.org/).
 
-## install elm
+## Install elm
 
 ```shell
 npm install elm -g
@@ -12,22 +12,21 @@ npm install elm -g
 
 With the elm repl you can test out elm code in your cli.
 
- ```shell
- elm repl
- ```
- 
- ```elm
- :help
- "hello"
- "hello" ++ " world"
- isNegative n = n < 0
- isNegative 4
- isNegative -3
- point = { x = 3, y = 4 }
- point.x
- ```
- 
- ## hello world
- 
- Create a [hello world](hello-world) web site.
- 
+```shell
+elm repl
+```
+
+```elm
+:help
+"hello"
+"hello" ++ " world"
+isNegative n = n < 0
+isNegative 4
+isNegative -3
+point = { x = 3, y = 4 }
+point.x
+```
+
+## [hello world](hello-world)
+
+Create a hello world web site.
