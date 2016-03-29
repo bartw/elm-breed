@@ -76,6 +76,7 @@ view address model =
         [ div 
             [ id "breedapp" ] 
             [ lazy3 personEntry address model.firstNameField model.lastNameField
+            , lazy2 personList address model.people
             ]
         ]
 
@@ -107,6 +108,18 @@ personEntry address firstName lastName =
             , onClick address AddPerson ]
             [ text "Add" ]
         ]
+        
+personList : Address Action -> List Person -> Html
+personList address people =
+    ul
+        [ id "people-list" ]
+        (List.map (personItem address) (people))  
+        
+personItem : Address Action -> Person -> Html
+personItem address person =
+    li
+        [ class "person-item" ]
+        [ text (person.firstName ++ " " ++ person.lastName) ]        
 
 -- INPUTS
 
