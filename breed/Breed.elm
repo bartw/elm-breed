@@ -129,7 +129,8 @@ personItem : Address Action -> Person -> Html
 personItem address person =
     li
         [ class "person-item" ]
-        [ text (person.firstName ++ " " ++ person.lastName) ]        
+        [ input [ type' "checkbox" ] []
+        , span [] [text (person.firstName ++ " " ++ person.lastName) ] ]
 
 -- INPUTS
 
