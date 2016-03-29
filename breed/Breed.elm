@@ -19,8 +19,15 @@ type alias Model =
 type alias Person =
     { firstName : String
     , lastName : String
+    , father : Maybe Parent
+    , mother : Maybe Parent
+    , children : List Child
     , id : Int
     }
+    
+type Parent = Parent (Person)
+    
+type Child = Child (Person)
     
 emptyModel : Model
 emptyModel =
@@ -34,6 +41,9 @@ newPerson : String -> String -> Int -> Person
 newPerson firstName lastName id =
     { firstName = firstName
     , lastName = lastName
+    , father = Nothing
+    , mother = Nothing
+    , children = []
     , id = id
     }    
 
